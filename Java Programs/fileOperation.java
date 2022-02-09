@@ -1,5 +1,3 @@
-package java;
-
 // Importing File class  
 import java.io.File;
 // Importing the FileWriter class  
@@ -15,17 +13,14 @@ class CreateFile {
         try {
             // Creating a file in the specified location
             File file = new File(file_location);
-            // If file does not exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
+            if (file.createNewFile()) {
+                System.out.println("File " + file.getName() + " is created successfully.");
+            } else {
+                System.out.println("File is already exist in the directory.");
             }
-            // If file already exists, then append to it
-            FileWriter fileWritter = new FileWriter(file.getName(), true);
-            fileWritter.write("\n");
-            fileWritter.close();
-            System.out.println("File created successfully\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            System.out.println("An unexpected error is occurred.");
+            exception.printStackTrace();
         }
     }
 
@@ -144,7 +139,7 @@ class CreateFile {
         // Creating a file
         fileCreation(file_location);
         // Pass the content and location to write
-        String content = "Sample Text";
+        String content = "Sample Text line 1 \nSample Text line 2\nSample Text line 3";
         fileWriting(file_location, content);
         // Reading the file
         fileReading(file_location);
@@ -152,7 +147,7 @@ class CreateFile {
         String new_file_location = "C:/Users/User/Local_Files/FileOperationExample1.txt";
         fileCopy(file_location, new_file_location);
         // Seek a word inside file
-        fileSeek(file_location, "Text");
+        fileSeek(file_location, "line 2");
         // delete a file if wanted for now i have commented it
         // fileDelete(file_location);
     }
